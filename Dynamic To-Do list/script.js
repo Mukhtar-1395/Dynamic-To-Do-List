@@ -5,25 +5,21 @@ const STORAGE_KEY = 'todoList';
 let todos = [];
 let currentFilter = 'all';
 
-// Initialize app
 function init() {
     loadTodos();
     renderTodos();
     attachEnterKeyListener();
 }
 
-// Load todos from localStorage
 function loadTodos() {
     const stored = localStorage.getItem(STORAGE_KEY);
     todos = stored ? JSON.parse(stored) : [];
 }
 
-// Save todos to localStorage
 function saveTodos() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
 }
 
-// Add a new todo
 function addTodo() {
     const text = todoInput.value.trim();
     
@@ -46,7 +42,6 @@ function addTodo() {
     todoInput.focus();
 }
 
-// Toggle todo completion
 function toggleTodo(id) {
     const todo = todos.find(t => t.id === id);
     if (todo) {
@@ -56,18 +51,15 @@ function toggleTodo(id) {
     }
 }
 
-// Delete a todo
 function deleteTodo(id) {
     todos = todos.filter(t => t.id !== id);
     saveTodos();
     renderTodos();
 }
 
-// Filter todos based on status
 function filterTodos(filter) {
     currentFilter = filter;
     
-    // Update filter button styles
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active');
     });
@@ -76,7 +68,6 @@ function filterTodos(filter) {
     renderTodos();
 }
 
-// Get filtered todos
 function getFilteredTodos() {
     switch (currentFilter) {
         case 'active':
@@ -88,7 +79,6 @@ function getFilteredTodos() {
     }
 }
 
-// Render todos
 function renderTodos() {
     todoList.innerHTML = '';
     const filtered = getFilteredTodos();
@@ -122,7 +112,6 @@ function renderTodos() {
     updateStats();
 }
 
-// Update statistics
 function updateStats() {
     const total = todos.length;
     const completed = todos.filter(t => t.completed).length;
@@ -133,7 +122,6 @@ function updateStats() {
     document.getElementById('completedCount').textContent = completed;
 }
 
-// Clear all completed todos
 function clearAllCompleted() {
     if (todos.some(t => t.completed)) {
         if (confirm('Are you sure you want to delete all completed tasks?')) {
@@ -144,14 +132,12 @@ function clearAllCompleted() {
     }
 }
 
-// Escape HTML to prevent XSS
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
 }
 
-// Allow adding todo with Enter key
 function attachEnterKeyListener() {
     todoInput.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
@@ -160,5 +146,5 @@ function attachEnterKeyListener() {
     });
 }
 
-// Start the app
 init();
+
