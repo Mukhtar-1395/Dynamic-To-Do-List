@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic To-Do List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📝 My To-Do List</h1>
+        <p class="subtitle">Stay organized and productive</p>
+
+        <div class="input-group">
+            <input 
+                type="text" 
+                id="todoInput" 
+                placeholder="Add a new task..." 
+                aria-label="New task input"
+            >
+            <button onclick="addTodo()">Add</button>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterTodos('all')">All</button>
+            <button class="filter-btn" onclick="filterTodos('active')">Active</button>
+            <button class="filter-btn" onclick="filterTodos('completed')">Completed</button>
+        </div>
+
+        <ul id="todoList"></ul>
+
+        <div class="empty-state" id="emptyState" style="display: none;">
+            ✨ No tasks yet. Add one to get started!
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number" id="totalCount">0</div>
+                <div>Total</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="activeCount">0</div>
+                <div>Active</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="completedCount">0</div>
+                <div>Completed</div>
+            </div>
+        </div>
+
+        <button class="clear-all-btn" onclick="clearAllCompleted()">Clear Completed</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
